@@ -8,10 +8,11 @@ import {authentification,fireStore}from "../firebase"
 import { signInWithPopup,GoogleAuthProvider} from "firebase/auth";
 import {  addDoc, collection } from "firebase/firestore"
 import myContext from './Context';
-import { useState} from "react";
+import { useState,useEffect} from "react";
+
  const SignUp = () => {
   const cont = useContext(myContext)
-  const {setIsUser} = cont
+  const {setIsUser,gettingUsers} = cont
 let navigate = useNavigate();
   const [userData,setUserData]=useState({
     name : "",
@@ -19,6 +20,14 @@ let navigate = useNavigate();
     password: "",
     confirmPassword :"",
   })
+  useEffect(() => {
+
+    gettingUsers(fireStore)
+
+
+
+
+  },[])
 
 
   let name,value;
@@ -42,6 +51,7 @@ let navigate = useNavigate();
         isGoogle:false,
 
       });
+      gettingUsers(fireStore)
       return result
 
 
@@ -75,6 +85,7 @@ const name =data.user.displayName
       isGoogle:true,
     })
     setIsUser(true)
+    gettingUsers(fireStore)
     navigate('/main')
      }
  }

@@ -1,8 +1,8 @@
 import React from 'react';
 import Profile from './Profile';
-import Friends from './Friends';
+import Friends from './ChatRoom';
 import "./main.css"
-import Chats from "./chats/Chats"
+import Chats from "./chats/FriendsList"
 import LoginHoc from "../create account/LoginHoc"
 import Icon from './buttons/Icon';
 const Main = () => {

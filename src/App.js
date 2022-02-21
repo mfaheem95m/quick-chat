@@ -5,9 +5,9 @@ import SignUp from "./create account/SignUp"
 import { BrowserRouter ,Routes, Route } from "react-router-dom";
 import Login from "./create account/Login"
 import {Provider} from "./create account/Context"
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import {fireStore}from "./firebase"
-
+import { doc, getDoc} from "firebase/firestore";
 import { Navigate } from "react-router-dom";
  const App = () => {
 
@@ -31,7 +31,6 @@ const [isUser,setIsUser] = useState(false)
     setRecieverImg(item.photo)
     setRecieverGoogle(item.isGoogle)
     setRecieverOnline(item.isOnline)
-
       })
   const isLoged = ((islogin) => {
 setIsLogin({islogin})
@@ -58,15 +57,25 @@ async function gettingUsers (db) {
 
  }
 
+ async function getMessages(db) {
 
-  useEffect(() => {
+  const docRef = doc(db, "messages", messageid);
+  const docSnap = await getDoc(docRef);
+  return docSnap
+  }
+   async function gettingMessages() {
 
-     gettingUsers(fireStore)
+    try{
+     const snapshot = await getMessages(fireStore);
 
+  const snapshotData =snapshot.data()
+  const messCollection = snapshotData.message
+ console.log("messagess",SetMessageCollection(messCollection));
 
-
-
-   },[isUser])
+    } catch (err){
+       console.log("error",err)
+    }
+   }
 
 
    const contextState = {
@@ -85,13 +94,14 @@ async function gettingUsers (db) {
   SetMessageCollection,
   setIsUser,
   recieverImg,recieverGoogle,
-  recieverOnline
-
+  recieverOnline,
+  gettingMessages,
+  gettingUsers,isUser
 
 }
 
 
-console.log("fqwe",loginInfo)
+console.log("fqwe")
 console.log("lah", typeof clickedItem.id)
 console.log("lahore",users)
 console.log("messageCollection",messageCollection)

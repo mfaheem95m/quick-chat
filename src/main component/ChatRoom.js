@@ -6,13 +6,21 @@ import myContext from "../create account/Context"
 import { useContext,useState } from "react";
 import {fireStore}from "../firebase"
 import { doc, updateDoc ,arrayUnion} from "firebase/firestore";
+import {useEffect} from "react";
 const Friends = () => {
   const cont = useContext(myContext)
-  const {messageid,loginInfo,recieverId,show} = cont
+  const {messageid,loginInfo,recieverId,show,gettingMessages} = cont
   const [text,setText] = useState("")
 
 const [isMessage,setIsMessage] = useState(false)
 // setIsMessage(false)
+
+  useEffect(() => {
+
+     gettingMessages(fireStore)
+
+   },[])
+
 const handleBlur = () => {
   setIsMessage(false)
 }
@@ -33,11 +41,14 @@ const handleBlur = () => {
       })
 
        });
+       setIsMessage(true)
+      await gettingMessages()
+
 
     } catch(err) {
       console.log("errorrr",err)
     }
-  setIsMessage(true)
+
   setText("")
     }
 

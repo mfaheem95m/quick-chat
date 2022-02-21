@@ -8,10 +8,11 @@ import OnlineBadge from "./OnlineBadge"
 
   const { onClickedFriend,setShow} = cont
 
- const clicked = ((item) => {
+async function clicked(item)  {
   onClickedFriend(item)
   setShow(true)
- })
+
+ }
   return (
     <div id = "faheem" onClick = {() => clicked(item)}>
     <div className='chatting'>
