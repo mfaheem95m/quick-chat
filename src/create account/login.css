@@ -1,0 +1,140 @@
+* {
+  box-sizing: border-box;
+  color: #333;
+}
+body {
+  background-color: white;
+  margin: 0;
+  padding:50px 50px 50px 200px;
+
+}
+.container-first-half-login{
+  width: 50%;
+  background-color: yellow;
+  height: 705px;
+  float: right;
+  display: flex;
+  justify-content: center;
+   flex-direction: column;
+   align-items: center;
+}
+
+.flex-container > div {
+ color: white;
+  width: 400px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+}
+.flex-container .item-one h1 {
+  position: absolute;
+    bottom: 0;
+    margin: 60vh auto;
+    color: #fff;
+    font-size: 50px;
+    padding-left: 80px;
+}
+.flex-container .item-two h3 {
+  position: absolute;
+  bottom: 0;
+  margin: 50vh auto;
+  color: #fff;
+  font-size: 35px;
+}
+
+.flex-container .item-three button {
+  position: absolute;
+  bottom: 0;
+  font-size: 25px;
+  margin: 40vh auto;
+  padding: 10px 55px;
+  background-color: #f1a566;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 15px 15px 25px #a8a8a8;
+  transition: box-shadow 0.5s;
+  outline: none;
+}
+
+.flex-container .item-three {
+  padding-right: 140px;
+}
+
+.flex-container .item-three :hover {
+  box-shadow: 5px 5px 15px #aaa;
+}
+
+.container-second-half-login{
+  width: 50%;
+  background-color: white;
+  height: 705px;
+
+  float: left;
+  display: flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+}
+.container-second-half  {
+  padding-top: 100px;
+}
+
+.container-second-half-login .con-item-three input {
+  min-width: 400px;
+  display: block;
+  margin: 20px;
+  padding: 15px 20px;
+  background-color: #ece7e7;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  box-shadow: 15px 15px 25px #a8a8a8;
+  transition: box-shadow 0.5s;
+}
+.container-second-half-login .con-item-three input:focus {
+  box-shadow: 5px 5px 15px #a8a8a8;
+}
+
+.con-item-four button {
+  min-width: 400px;
+  display: block;
+  margin: auto;
+  padding: 15px 35px ;
+  background-color: #f1a566;
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  border-radius: 10px;
+  box-shadow: 15px 15px 20px #a8a8a8;
+  transition: box-shadow 0.5s;
+  outline: none;
+}
+.con-item-four :hover {
+  box-shadow: 5px 5px 15px #aaa;
+}
+
+.container-second-half-login .con-item-one h1{
+padding-left: 100px;
+padding-bottom: 20px;
+}
+
+.con-item-five button {
+
+  min-width: 400px;
+  display: block;
+  margin: 20px;
+  padding: 15px 55px;
+  background-color: greenyellow;
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  border-radius: 10px;
+  box-shadow: 15px 15px 20px #a8a8a8;
+  transition: box-shadow 0.5s;
+  outline: none;
+}
+.con-item-five :hover {
+  box-shadow: 5px 5px 15px #aaa;
+}

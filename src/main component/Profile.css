@@ -1,0 +1,41 @@
+.profile-main{
+  display: grid;
+  grid-template-rows : 60px 35px 30px 30px;
+ padding-top: 20px;
+}
+.pic-main{
+padding-left: 48px;
+
+
+}
+.speci {
+  padding-right: 7px;
+}
+
+.des-user{
+  font-size: 11px;
+  color: gray;
+  text-align: center;
+  padding-right: 16px;
+}
+
+.name-user{
+  font-size:  55%;
+
+
+}
+.status-user {
+  padding-left: 60px;
+  font-size: 23%;
+ color: white;
+}
+
+.logout-btn{
+  background-color: aqua;
+  width: 10vh;
+
+}
+.btn-log{
+  float: center;
+  font-weight: 20px;
+}

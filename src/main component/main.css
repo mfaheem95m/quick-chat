@@ -1,0 +1,154 @@
+* {
+  box-sizing: border-box;
+  color: #333;
+}
+body {
+  background-color: lightblue;
+  margin: 0;
+  padding:50px 50px 50px 200px;
+
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+  .container {
+    width: 80%;
+   height : 95vh;
+    background-color: white;
+   padding-left: 100px;
+   padding-right: 100px;
+
+  border: 1px white ;
+  border-radius: 12px;
+
+
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 250px 600px;
+    background-color: white;
+   font-size: 30px;
+   border: 1px white ;
+   border-radius: 12px;
+   grid-gap: 20px;
+  }
+
+  .grid-item-one {
+    background-color: white;
+    border: 1px solid white(0, 0, 0, 0.8);
+
+
+    border-radius: 12px;
+  }
+.grid-item-two {
+  width: 90%;
+  height : 90vh;
+   background-color: lightblue;
+
+ border: 1px lightblue ;
+ border-radius: 12px;
+
+}
+
+.profile {
+  width: 80%;
+  height : 220px;
+   background-color: lightblue;
+  text-align: center;
+
+
+ border: 1px black ;
+ border-radius: 12px;
+}
+
+
+
+.use{
+
+
+}
+.text {
+  font-size: 18px;
+}
+.item{
+  display: grid;
+  background-color: pink;
+ grid-template-columns: 50;
+ width: 8%;
+ height: 20%;
+  margin: 20px auto;
+  border: 1px solid silver;
+}
+.gridding{
+  display: grid;
+  grid-template-rows: 78vh auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  font-size: 30px;
+  border: 1px white ;
+  border-radius: 12px;
+
+}
+.grid-one {
+  background-color: lightblue;
+  border: 1px solid white(0, 0, 0, 0.8);
+overflow: auto;
+  border-radius: 12px;
+}
+.grid-two{
+  background-color: white;
+  border: 1px solid white(0, 0, 0, 0.8);
+  width: 100%;
+
+  border-radius: 6px;
+}
+.head1{
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #37a5c9;
+
+  /* display: grid;
+  grid-template-columns
+  : 50px 350px 80px;
+  padding: 10px;
+ font-size: 30px;
+ border: 1px black;
+ border-radius: 12px; */
+}
+
+.lower-one {
+  background-color: white;
+  padding: 10px;
+}
+
+
+.lower-two {
+  background-color: white;
+  padding: 10px;
+}
+
+
+.lower-three {
+  background-color: white;
+  padding: 10px;
+}
+
+.input {
+  width: 330px;
+  height: 40px;
+  border: 1px solid white;
+  border-radius: 8px;
+}
+.button{
+ width: 70px;
+  height: 40px;
+  background-color: blue;
+  color: white;
+  font-size: 20px;
+  border: 1px solid white;
+  border-radius: 8px;
+}
+.profile-pic{
+  padding: 10px;
+}

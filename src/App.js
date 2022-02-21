@@ -1,25 +1,123 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import Main from "./main component/Main"
+import { getDocs,collection } from "firebase/firestore"
+import SignUp from "./create account/SignUp"
+import { BrowserRouter ,Routes, Route } from "react-router-dom";
+import Login from "./create account/Login"
+import {Provider} from "./create account/Context"
+import { useState,useEffect } from "react";
+import {fireStore}from "./firebase"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Navigate } from "react-router-dom";
+ const App = () => {
+
+  const [users,setUser] = useState([])
+  const[isLogin,setIsLogin]=useState(false)
+const[ loginInfo,setLoginInfo] = useState([])
+const[clickedItem,setClickedItem] = useState([])
+const[messageCollection,SetMessageCollection]=useState([])
+const[messageid]= useState('lGVVYbcTNWivrZeDcW8H')
+const [recieverId,setRecieverId]= useState('')
+const [recieverImg,setRecieverImg]= useState('')
+const [recieverGoogle,setRecieverGoogle]= useState(false)
+const [recieverOnline,setRecieverOnline]= useState(false)
+const [show,setShow] = useState(false)
+const [isUser,setIsUser] = useState(false)
+
+
+  const  onClickedFriend = ((item) => {
+    setClickedItem(item)
+    setRecieverId(item.id)
+    setRecieverImg(item.photo)
+    setRecieverGoogle(item.isGoogle)
+    setRecieverOnline(item.isOnline)
+
+      })
+  const isLoged = ((islogin) => {
+setIsLogin({islogin})
+  })
+  async function getUser(db) {
+    const querySnapshot = await getDocs(collection(db, "users"));
+
+    const postsList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return postsList;
+
+}
+async function gettingUsers (db) {
+
+  try{
+   const snapshot = await getUser(db);
+  console.log("array",snapshot)
+
+
+ setUser(snapshot);
+
+  } catch (err){
+     console.log("error")
+  }
+
+ }
+
+
+  useEffect(() => {
+
+     gettingUsers(fireStore)
+
+
+
+
+   },[isUser])
+
+
+   const contextState = {
+  isLoged,
+  isLogin,
+  users,
+  loginInfo,
+  setLoginInfo,
+  onClickedFriend,
+  messageid,
+  recieverId,
+  setShow,
+  show,
+  messageCollection,
+  setUser,
+  SetMessageCollection,
+  setIsUser,
+  recieverImg,recieverGoogle,
+  recieverOnline
+
+
 }
 
-export default App;
+
+console.log("fqwe",loginInfo)
+console.log("lah", typeof clickedItem.id)
+console.log("lahore",users)
+console.log("messageCollection",messageCollection)
+
+  return (
+    <div>
+       <Provider  value={contextState}>
+
+<BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/signup" element={<SignUp/>} />
+      { isLogin ?
+   <Route path="/main" element={<Main />} />
+    :
+    <Route path="*" element={<Navigate to ="/" />}/>
+
+     }
+
+    </Routes>
+  </BrowserRouter>
+       </Provider>
+
+    </div>
+
+  )
+}
+
+export default App

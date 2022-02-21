@@ -1,0 +1,20 @@
+.icon{
+  display: grid;
+  grid-template-columns : 60px 200px;
+ padding-top: 10px;
+padding-bottom: 25px;
+
+ font-size: 20px;
+}
+
+.icon-image{
+
+height: 60px;
+}
+
+.icon-title {
+
+
+height: 60px;
+padding-bottom: 30px;
+}
