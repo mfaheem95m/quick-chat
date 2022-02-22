@@ -13,7 +13,7 @@ import {fireStore}from "../firebase"
 import { doc, updateDoc } from "firebase/firestore";
 const Profile = () => {
   const cont = useContext(myContext)
-  const {loginInfo,setIsUser} = cont
+  const {loginInfo,isLoged,setLoginInfo} = cont
   let navigate = useNavigate();
 const [checked,setChecked] = useState(true)
   async function updateData(id){
@@ -46,8 +46,9 @@ const [checked,setChecked] = useState(true)
    })
   const handleLog = ( ()=> {
     navigate("/")
+    setLoginInfo({})
     updateData(loginInfo.id)
-    setIsUser(false)
+    isLoged(false)
    })
    console.log("checked",checked)
    console.log("check",loginInfo.isOnline)

@@ -1,24 +1,36 @@
 import React from 'react'
 import "./login.css"
 import { Link } from "react-router-dom";
-import { useState,useContext } from "react";
+import { useState,useContext,useEffect } from "react";
 import myContext from './Context';
 import { useNavigate  } from 'react-router'
 import {authentification,fireStore}from "../firebase"
 import { signInWithPopup,GoogleAuthProvider} from "firebase/auth";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc ,collection,getDocs} from "firebase/firestore";
+import { query, where } from "firebase/firestore";
  const Login = () => {
   const cont = useContext(myContext)
   let navigate = useNavigate();
 
-  const {users,isLoged, setLoginInfo} = cont
+  const {users,isLoged, setLoginInfo,loginInfo} = cont
 
   const [logUser,setLogUser] = useState({
-    name:"",
+    email :"",
     password: "",
   })
+  const [using,setUsing] = useState(false)
 
   let name,value;
+  // const emails =logUser.email
+  // const passwords =logUser.password
+  useEffect(() => {
+
+    getUse()
+
+
+
+
+  },[logUser.email,logUser.password])
   const handleChange = (event) => {
     name = event.target.name;
     value = event.target.value;
@@ -41,9 +53,9 @@ import { doc, updateDoc } from "firebase/firestore";
        );
 console.log("isuser",found)
       if(isUser) {
-        setLoginInfo(found)
+        // setLoginInfo(found)
         updateData(found.id)
-        isLoged(true);
+
         navigate('/main')
 
       }
@@ -62,39 +74,78 @@ console.log("isuser",found)
  }
 
 
-  const onLogin = () => {
+  const onLogin =async () => {
 
-    const {name,password} =logUser
-    const user = users
-    const isUser = user.some(item =>(
-      item.name === name && item.password === password
-      )
-     )
+  if(loginInfo.email && loginInfo.password){
+    isLoged(true)
+  alert("yess you are loged in your account")
+     navigate('/main')
 
-const found = user.find(item  =>  item.name === name && item.password === password);
-console.log("imp",found)
+  }else {
+    alert("no user found")
 
+    setLogUser({
+          email:"",
+          password: "",
+         })
+  }
+//     const user = users
+//     const isUser = user.some(item =>(
+//       item.email === email && item.password === password
+//       )
+//      )
 
+// const found = user.find(item  =>  item.email === email && item.password === password);
+// console.log("imp",found)
 
-     if(isUser){
-       alert("yess you are loged in your account")
-       isLoged(isUser);
-       navigate('/main')
-       setLoginInfo(found)
-       updateData(found.id)
-       console.log("idf",found.id)
+    //  if(loginInfo.length === 1){
+    //    alert("yess you are loged in your account")
+    //    isLoged(true);
+    //    navigate('/main')
 
-     }else{
-       alert("please enter the correct userName and password")
-       setLogUser({
-        name:"",
-        password: "",
-       })
-       console.log("12",users.snapshot)
-     }
+    //    updateData(loginInfo.id)
+    //    console.log("idf",loginInfo.id)
+
+    //  }else{
+    //    alert("please enter the correct userName and password")
+    //    setLogUser({
+    //     email:"",
+    //     password: "",
+    //    })
+    //    console.log("12",users.snapshot)
+    //  }
 
   }
-  console.log("isuser2",users)
+
+  async function getUse() {
+    const {email,password} =logUser
+    const emails =logUser.email
+    const passwords =logUser.password
+    if(emails && passwords){
+
+    }
+    const citiesRef = collection(fireStore,  "users");
+    const q =  await query(citiesRef, where("email", "==", emails), where("password", "==", passwords));
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+
+      setLoginInfo({ id: doc.id, ...doc.data() })
+      setUsing(true)
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+    });
+console.log("name",emails)
+console.log("pass",passwords)
+
+
+
+}
+
+
+
+console.log("never",loginInfo)
+
   return (
     <div>
      <div className='container-first-half-login'>
@@ -120,12 +171,12 @@ console.log("imp",found)
             </div>
             <div className='con-item-three'>
             <input
-                          type="text"
-                          name="name"
+                          type="email"
+                          name="email"
 
                           className="form-control"
-                          placeholder="user Name"
-                          value={logUser.name || ''}
+                          placeholder="Email"
+                          value={logUser.email || ''}
                           onChange={handleChange}
                         />
                 </div>

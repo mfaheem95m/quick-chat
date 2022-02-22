@@ -5,14 +5,15 @@ import SignUp from "./create account/SignUp"
 import { BrowserRouter ,Routes, Route } from "react-router-dom";
 import Login from "./create account/Login"
 import {Provider} from "./create account/Context"
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {fireStore}from "./firebase"
+import { query, where } from "firebase/firestore";
 import { doc, getDoc} from "firebase/firestore";
 import { Navigate } from "react-router-dom";
  const App = () => {
 
   const [users,setUser] = useState([])
-  const[isLogin,setIsLogin]=useState(false)
+  const[log,isLoged]=useState(false)
 const[ loginInfo,setLoginInfo] = useState([])
 const[clickedItem,setClickedItem] = useState([])
 const[messageCollection,SetMessageCollection]=useState([])
@@ -24,6 +25,15 @@ const [recieverOnline,setRecieverOnline]= useState(false)
 const [show,setShow] = useState(false)
 const [isUser,setIsUser] = useState(false)
 
+useEffect(() => {
+
+  gettingUsers(fireStore)
+  getMess()
+
+
+
+},[])
+
 
   const  onClickedFriend = ((item) => {
     setClickedItem(item)
@@ -32,13 +42,16 @@ const [isUser,setIsUser] = useState(false)
     setRecieverGoogle(item.isGoogle)
     setRecieverOnline(item.isOnline)
       })
-  const isLoged = ((islogin) => {
-setIsLogin({islogin})
-  })
+//   const isLoged = ((islogin) => {
+// setIsLogin(islogin)
+//   })
   async function getUser(db) {
     const querySnapshot = await getDocs(collection(db, "users"));
+    console.log("date",querySnapshot.docs)
+    const postsList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data()}
 
-    const postsList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+      ));
     return postsList;
 
 }
@@ -52,7 +65,7 @@ async function gettingUsers (db) {
  setUser(snapshot);
 
   } catch (err){
-     console.log("error")
+     console.log("error",err)
   }
 
  }
@@ -70,7 +83,7 @@ async function gettingUsers (db) {
 
   const snapshotData =snapshot.data()
   const messCollection = snapshotData.message
- console.log("messagess",SetMessageCollection(messCollection));
+ SetMessageCollection(messCollection);
 
     } catch (err){
        console.log("error",err)
@@ -78,9 +91,49 @@ async function gettingUsers (db) {
    }
 
 
+
+  //  async function getUse() {
+  //   const {email,password} =logUser
+  //   const emails =logUser.email
+  //   const passwords =logUser.password
+  //   if(emails && passwords){
+
+  //   }
+  //   const citiesRef = collection(fireStore,  "users");
+  //   const q =  await query(citiesRef, where("email", "==", emails), where("password", "==", passwords));
+
+  //   const querySnapshot = await getDocs(q);
+  //   querySnapshot.forEach((doc) => {
+
+  //     setLoginInfo({ id: doc.id, ...doc.data() })
+  //     setUsing(true)
+  //     // doc.data() is never undefined for query doc snapshots
+  //     console.log(doc.id, " => ", doc.data());
+  //   });
+
+
+
+
+
+
+   async function getMess() {
+
+    // const docRef = doc(fireStore, "messages", messageid);
+  // const docRef = doc(fireStore, "messages", messageid);
+  // const docSnack= await getDoc(docRef);
+ const docRef = collection(fireStore, "messages");
+
+    const q = await query( docRef , where("message", "array-contains", { senderId: "dcba", recieveId: "abcd"}));
+
+    const docSnap = await getDoc(q);
+console.log("docSnap,",q)
+    return docSnap
+
+    }
+
    const contextState = {
   isLoged,
-  isLogin,
+
   users,
   loginInfo,
   setLoginInfo,
@@ -101,9 +154,9 @@ async function gettingUsers (db) {
 }
 
 
-console.log("fqwe")
+console.log("fqwe",users)
 console.log("lah", typeof clickedItem.id)
-console.log("lahore",users)
+console.log("lahore",clickedItem)
 console.log("messageCollection",messageCollection)
 
   return (
@@ -114,10 +167,10 @@ console.log("messageCollection",messageCollection)
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<SignUp/>} />
-      { isLogin ?
+      { log ?
    <Route path="/main" element={<Main />} />
     :
-    <Route path="*" element={<Navigate to ="/" />}/>
+     <Route path="*" element={<Navigate to ="/" />}/>
 
      }
 
