@@ -89,31 +89,7 @@ console.log("isuser",found)
           password: "",
          })
   }
-//     const user = users
-//     const isUser = user.some(item =>(
-//       item.email === email && item.password === password
-//       )
-//      )
 
-// const found = user.find(item  =>  item.email === email && item.password === password);
-// console.log("imp",found)
-
-    //  if(loginInfo.length === 1){
-    //    alert("yess you are loged in your account")
-    //    isLoged(true);
-    //    navigate('/main')
-
-    //    updateData(loginInfo.id)
-    //    console.log("idf",loginInfo.id)
-
-    //  }else{
-    //    alert("please enter the correct userName and password")
-    //    setLogUser({
-    //     email:"",
-    //     password: "",
-    //    })
-    //    console.log("12",users.snapshot)
-    //  }
 
   }
 
