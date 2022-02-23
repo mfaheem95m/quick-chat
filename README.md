@@ -1,4 +1,4 @@
-# A Eye Wear Shopping App
+# Quick Chat
 
 A Real Time Chat app Built using React, React-Context, React-Hooks, Firebase and Material-UI. A user can log in and sign-up through google using firebase built-in UI. When multiple users logged in then their online status will be updated and displayed in real-time accordingly.
 
